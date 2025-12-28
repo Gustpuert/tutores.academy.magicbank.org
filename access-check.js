@@ -1,41 +1,37 @@
-/**
- * MagicBank Frontend - Access Check
- * A20 - Redirección automática por backend
- */
-
 (async function () {
+  const token = localStorage.getItem("magicbank_token");
+
+  if (!token) {
+    window.location.href = "https://login.magicbank.org";
+    return;
+  }
+
   try {
-    const token = localStorage.getItem("magicbank_token");
-
-    if (!token) {
-      console.warn("Sin token, acceso denegado");
-      return;
-    }
-
-    const response = await fetch(
+    const res = await fetch(
       "https://magic-bank-backend-production-713e.up.railway.app/api/access/check",
       {
-        method: "GET",
+        method: "POST",
         headers: {
-          "Authorization": `Bearer ${token}`,
-          "Content-Type": "application/json"
-        }
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + token
+        },
+        body: JSON.stringify({
+          destino: window.location.hostname
+        })
       }
     );
 
-    if (!response.ok) {
-      console.warn("Acceso no válido");
-      return;
+    if (!res.ok) {
+      throw new Error("Acceso denegado");
     }
 
-    const data = await response.json();
+    const data = await res.json();
 
-    if (data.ok && data.destino) {
-      console.log("Redirigiendo a:", data.destino);
-      window.location.href = data.destino;
+    if (!data.allowed) {
+      window.location.href = "https://login.magicbank.org";
     }
 
-  } catch (error) {
-    console.error("Error A20 access-check:", error);
+  } catch (err) {
+    window.location.href = "https://login.magicbank.org";
   }
 })();
