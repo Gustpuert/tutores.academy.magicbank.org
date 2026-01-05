@@ -110,10 +110,29 @@
       color: var(--gris);
       border-top: 1px solid rgba(255,255,255,0.08);
     }
+
+    /* ===== CRONÓMETRO ADMIN ===== */
+    #mb-admin-timer {
+      position: fixed;
+      top: 14px;
+      right: 16px;
+      background: rgba(0,0,0,0.55);
+      color: var(--dorado);
+      padding: 8px 14px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      z-index: 9999;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+      display: none;
+    }
   </style>
 </head>
 
 <body>
+
+<!-- CRONÓMETRO -->
+<div id="mb-admin-timer">Acceso admin · 15:00</div>
 
 <header>
   <nav>
@@ -217,6 +236,39 @@
 <footer>
   <p>© MagicBank Academy — Enseñanza adaptativa por capas. Todos los derechos reservados.</p>
 </footer>
+
+<!-- SCRIPT ÚNICO · CRONÓMETRO -->
+<script>
+  const DURACION = 15 * 60 * 1000;
+  const timerBox = document.getElementById("mb-admin-timer");
+
+  if (!localStorage.getItem("mb_admin_start")) {
+    localStorage.setItem("mb_admin_start", Date.now().toString());
+    localStorage.setItem("mb_admin_activo", "true");
+  }
+
+  function actualizarTimer() {
+    const inicio = parseInt(localStorage.getItem("mb_admin_start"), 10);
+    const ahora = Date.now();
+    const restante = DURACION - (ahora - inicio);
+
+    if (restante <= 0) {
+      localStorage.removeItem("mb_admin_start");
+      localStorage.removeItem("mb_admin_activo");
+      location.reload();
+      return;
+    }
+
+    const min = Math.floor(restante / 60000);
+    const seg = Math.floor((restante % 60000) / 1000).toString().padStart(2, "0");
+
+    timerBox.style.display = "block";
+    timerBox.textContent = `Acceso admin · ${min}:${seg}`;
+  }
+
+  setInterval(actualizarTimer, 1000);
+  actualizarTimer();
+</script>
 
 </body>
 </html>
