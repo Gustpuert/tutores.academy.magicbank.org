@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MagicBank Academy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --azul-profundo: #070C2A;
+      --blanco: #FFFFFF;
+      --gris: #CFCFD6;
+      --dorado: #D6B15A;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--azul-profundo);
+      color: var(--blanco);
+      line-height: 1.5;
+    }
+
+    .menu-toggle {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      background: rgba(214,177,90,0.25);
+      border: 1px solid rgba(214,177,90,0.6);
+      color: var(--dorado);
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      z-index: 10000;
+    }
+
+    .menu {
+      position: fixed;
+      top: 0;
+      left: -280px;
+      width: 260px;
+      height: 100vh;
+      background: rgba(7,12,42,0.98);
+      padding: 90px 20px 30px;
+      transition: left 0.3s ease;
+      z-index: 9999;
+    }
+
+    .menu.open { left: 0; }
+
+    .menu a {
+      display: block;
+      color: var(--gris);
+      text-decoration: none;
+      font-size: 15px;
+      margin-bottom: 14px;
+    }
+
+    .menu a:hover { color: var(--dorado); }
+
+    section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 70px 28px;
+    }
+
+    h1 {
+      font-size: 36px;
+      text-align: center;
+      margin-bottom: 16px;
+      color: var(--dorado);
+    }
+
+    p.intro {
+      text-align: center;
+      color: var(--gris);
+      max-width: 900px;
+      margin: auto;
+      margin-bottom: 60px;
+      font-size: 17px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 26px;
+    }
+
+    .card h3 { color: var(--dorado); margin-bottom: 12px; }
+    .card p { color: var(--gris); margin-bottom: 18px; }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 22px;
+      background-color: var(--dorado);
+      color: #1A1A1A;
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px;
+      font-size: 13px;
+      color: var(--gris);
+    }
+  </style>
+</head>
+
+<body onclick="closeMenu(event)">
+
+<div class="menu-toggle" onclick="toggleMenu()">☰ Menu</div>
+
+<div class="menu" id="menu">
+  <a href="https://magicbank.org">Home</a>
+  <a href="https://academy.magicbank.org/">Academy (Paid)</a>
+  <a href="https://gustpuert.github.io/university.magicbank.org/">University (Paid)</a>
+
+  <!-- ENLACE CORREGIDO -->
+  <a href="https://gustpuert.github.io/tutores.university.magicbank.org/">University · Tutores</a>
+
+  <a href="https://magicbank.org/fabrica-de-tutores-pago.html">Tutor Factory</a>
+
+  <hr style="margin:20px 0;border-color:#444">
+
+  <a href="#" onclick="setLang('en')">🇬🇧 English</a>
+  <a href="#" onclick="setLang('es')">🇪🇸 Español</a>
+</div>
+
+<section>
+  <h1 data-i18n="title">MagicBank Academy</h1>
+
+  <p class="intro" data-i18n="intro">
+    Advanced training with high-level tutors. Adaptive learning and continuous correction.
+  </p>
+
+  <div class="grid">
+
+    <div class="card"><h3>Cocina Avanzada</h3><p data-i18n="cook">Professional culinary training.</p><a class="btn" href="https://chatgpt.com/g/g-6925b1e4cff88191a3e46165e9ab7824-elchef" target="_blank">Enter</a></div>
+    <div class="card"><h3>Nutrición Inteligente</h3><p data-i18n="nutri">Applied nutrition and healthy habits.</p><a class="btn" href="https://chatgpt.com/g/g-694ffee00bb88191b8a708c68b13a0e1-nutricion-inteligente-tutor-pro" target="_blank">Enter</a></div>
+    <div class="card"><h3>ChatGPT Avanzado</h3><p data-i18n="ai">Professional AI usage.</p><a class="btn" href="https://chatgpt.com/g/g-6925338f45d88191b5c5c2b3080e553a-tutor-especializado" target="_blank">Enter</a></div>
+    <div class="card"><h3>Inglés Avanzado</h3><p data-i18n="eng">Real English mastery.</p><a class="btn" href="https://chatgpt.com/g/g-69269540618c8191ad2fcc7a5a86b622-tutor-de-ingles-magicbank" target="_blank">Enter</a></div>
+    <div class="card"><h3>Francés</h3><p data-i18n="fr">French language mastery.</p><a class="btn" href="https://chatgpt.com/g/g-692b740a32a08191b53be9f92bede4c3-scarlet-french-magic-tutor" target="_blank">Enter</a></div>
+    <div class="card"><h3>Portugués</h3><p data-i18n="pt">Portuguese language training.</p><a class="btn" href="https://chatgpt.com/g/g-694ff45ee8a88191b72cd536885b0876-profesor-de-portugues" target="_blank">Enter</a></div>
+    <div class="card"><h3>Italiano</h3><p data-i18n="it">Italian fluency.</p><a class="btn" href="https://chatgpt.com/g/g-694ff655ce908191871b8656228b5971-profesor-de-italiano" target="_blank">Enter</a></div>
+    <div class="card"><h3>Alemán</h3><p data-i18n="de">German structure & logic.</p><a class="btn" href="https://chatgpt.com/g/g-694ff6db1224819184d471e770ab7bf4-profesor-de-aleman" target="_blank">Enter</a></div>
+    <div class="card"><h3>Chino Mandarín</h3><p data-i18n="zh">Mandarin language mastery.</p><a class="btn" href="https://chatgpt.com/g/g-694fec2d35c88191833aa2af7d92fce0-maestro-de-chino-mandarin" target="_blank">Enter</a></div>
+    <div class="card"><h3>Trading Cíclico</h3><p data-i18n="trade">Market cycle strategies.</p><a class="btn" href="https://chatgpt.com/g/g-6936550a35bc81919aa54bae25f5e133-trading-ciclico-tutor-magic-pro" target="_blank">Enter</a></div>
+
+  </div>
+</section>
+
+<footer>
+  <p>© MagicBank Academy — Adaptive education by layers.</p>
+</footer>
+
+<script>
+const texts = {
+  en: {
+    title: "MagicBank Academy",
+    intro: "Advanced training with high-level tutors. Adaptive learning and continuous correction.",
+    cook: "Professional culinary training.",
+    nutri: "Applied nutrition and healthy habits.",
+    ai: "Professional AI usage.",
+    eng: "Real English mastery.",
+    fr: "French language mastery.",
+    pt: "Portuguese language training.",
+    it: "Italian fluency.",
+    de: "German structure & logic.",
+    zh: "Mandarin language mastery.",
+    trade: "Market cycle strategies."
+  },
+  es: {
+    title: "MagicBank Academy",
+    intro: "Formación avanzada con tutores de alto nivel. Enseñanza adaptativa y corrección continua.",
+    cook: "Formación culinaria profesional.",
+    nutri: "Nutrición aplicada y hábitos saludables.",
+    ai: "Uso profesional de inteligencia artificial.",
+    eng: "Dominio real del idioma inglés.",
+    fr: "Dominio del idioma francés.",
+    pt: "Formación práctica en portugués.",
+    it: "Fluidez en italiano.",
+    de: "Estructura del idioma alemán.",
+    zh: "Dominio del idioma mandarín.",
+    trade: "Estrategias de ciclos de mercado."
+  }
+};
+
+function setLang(lang) {
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    el.innerText = texts[lang][el.dataset.i18n];
+  });
+}
+
+function toggleMenu() {
+  document.getElementById("menu").classList.toggle("open");
+}
+
+function closeMenu(e) {
+  if (!e.target.closest(".menu") && !e.target.closest(".menu-toggle")) {
+    document.getElementById("menu").classList.remove("open");
+  }
+}
+
+setLang("en");
+</script>
+
+</body>
+</html>
